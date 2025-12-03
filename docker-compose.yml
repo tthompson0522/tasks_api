@@ -1,0 +1,39 @@
+services:
+  tasks-db:
+    image: postgres
+    container_name: tasks-db
+    volumes: 
+      - postgres:/var/lib/postgresql
+    environment:
+      POSTGRES_DB: "tasks_api_development"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "password"
+    ports:
+      - "5433:5433"
+  web:
+    build: ../tasks_web
+    command: npm run dev
+    ports:
+      - "5173:5173"
+    # volumes:
+    #   - ./tasks_web:/app
+  api:
+    build: .
+    command: bundle exec puma -p 3000
+    ports:
+      - "3000:3000"
+    environment: 
+      - RAILS_ENV=development
+      - DBHOST=tasks-db
+      - DBUSER=postgres
+      - DBPASS=password
+    depends_on:
+      - tasks-db
+    # volumes:
+    #   - ./tasks_api:/rails
+
+volumes:
+  postgres:
+      
+
+    

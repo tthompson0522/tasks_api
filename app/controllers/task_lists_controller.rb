@@ -3,7 +3,6 @@ class TaskListsController < ApplicationController
   before_action :search_task_list, only: %i[ search ]
   # GET /task_lists
   def index
-    # @task_lists = TaskList.all
     @task_lists = TaskList.order(created_at: :desc)
 
     render json: @task_lists
@@ -40,7 +39,6 @@ class TaskListsController < ApplicationController
   end
 
   def search
-    # @tasks = Task.where("description LIKE ?", "%#{params.expect(:description)}%")
     render json: @task_lists
   end
 
@@ -51,21 +49,6 @@ class TaskListsController < ApplicationController
     end
 
     def search_task_list
-      # count = 0
-      # search_array = []
-      # search_params = []
-      # params.each do |k, v|
-      #   count = count + 1
-      #   if v.is_a?(String)
-      #     search_array.push("#{k} like ?")
-      #     search_params.push(v)
-      #   else
-      #     search_array.push("#{k} = ?")
-      #     search_params.push(v)
-      #   end
-      # end
-      # search_string = search_array.join("AND")
-      # @tasks = Task.where(search_string, *search_params)
       @task_lists = Task.where("name ILIKE ?", "%#{params.expect(:name)}%")
     end
 
