@@ -1,33 +1,25 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This application uses Ruby 3.3.10, React 19.2.0, and Postgresql.
 
-Things you may want to cover:
+It is assumed that the user has a working installation of git, docker, and docker compose.
 
-* Ruby version
+To install the application, run:
 
-* System dependencies
+git clone https://github.com/tthompson0522/tasks_api.git
 
-* Configuration
+git clone https://github.com/tthompson0522/tasks_web.git
 
-* Database creation
+cd tasks_api
 
-* Database initialization
+./setup.sh
 
-* How to run the test suite
+This will build the application images, start the containers, and initialize the database. 
 
-* Services (job queues, cache servers, search engines, etc.)
+Once running, the application can be accessed at http://localhost:5173
 
-* Deployment instructions
+The application allows the user to create, retrieve, update, and delete task lists, as well as create, retrieve, update, and delete tasks within these lists. The user can also search for individual tasks to update or delete them.
 
-* ...
+To stop the application, run:
 
-Initializing DB:
-docker compose build
-docker compose up
-
-docker compose exec api bash
-bin/rails db:create
-bin/rails db:migrate
-exit
+docker compose down

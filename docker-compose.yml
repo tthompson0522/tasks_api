@@ -15,8 +15,6 @@ services:
     command: npm run dev
     ports:
       - "5173:5173"
-    # volumes:
-    #   - ./tasks_web:/app
   api:
     build: .
     command: bundle exec puma -p 3000
@@ -29,8 +27,6 @@ services:
       - DBPASS=password
     depends_on:
       - tasks-db
-    # volumes:
-    #   - ./tasks_api:/rails
 
 volumes:
   postgres:
